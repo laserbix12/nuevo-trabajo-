@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:nuevo": "node dist/nuevo/server/server.mjs",
-    "deploy": "ng build --base-href /nuevo/ && npx angular-cli-ghpages --dir=dist/nuevo/browser"
+    "predeploy": "ng build --configuration production --base-href /nuevo-trabajo-/",
+    "deploy": "npx angular-cli-ghpages --dir=dist/nuevo/browser --404page=dist/nuevo/browser/index.html"
   },
   "private": true,
   "packageManager": "npm@11.6.2",
