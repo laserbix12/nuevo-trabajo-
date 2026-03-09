@@ -33,25 +33,32 @@ import { USUARIOS, Usuario } from '../datos';
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 12px;
       margin-bottom: 20px;
+      flex-wrap: nowrap;
     }
 
     .panel-header h2 {
       margin: 0;
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 700;
       color: #eaddff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .btn-add {
       background-color: #7c3bbf;
       color: #ffffff;
       border: none;
-      padding: 9px 18px;
+      padding: 9px 16px;
       border-radius: 8px;
       cursor: pointer;
       font-size: 13px;
       font-weight: 600;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .task-card {
