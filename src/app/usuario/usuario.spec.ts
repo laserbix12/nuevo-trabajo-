@@ -1,19 +1,24 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router'; // Importante para componentes Standalone
+import { Home } from './home'; // Asegúrate de que el nombre de la clase y el archivo coincidan
 
-import { Usuario } from './usuario';
-
-describe('Usuario', () => {
-  let component: Usuario;
-  let fixture: ComponentFixture<Usuario>;
+describe('Home Component', () => {
+  let component: Home;
+  let fixture: ComponentFixture<Home>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Usuario],
+      // 1. Importamos el componente (ya que es Standalone)
+      imports: [Home],
+      // 2. Proveemos las rutas necesarias para que routerLink no falle
+      providers: [
+        provideRouter([]) // Pasamos un arreglo vacío si no necesitamos probar navegación real
+      ]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Usuario);
+    fixture = TestBed.createComponent(Home);
     component = fixture.componentInstance;
-    await fixture.whenStable();
+    fixture.detectChanges(); // Ejecuta la detección de cambios inicial
   });
 
   it('should create', () => {
