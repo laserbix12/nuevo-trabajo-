@@ -11,14 +11,14 @@ import { USUARIOS, Usuario } from '../datos';
     <div class="task-panel" *ngIf="usuario">
       <div class="panel-header">
         <h2>Tareas de {{ usuario.nombre }}</h2>
-        <button class="btn-add">Agregar Tarea Nueva</button>
+        <button class="btn-add" (click)="agregarTarea()">Agregar Tarea Nueva</button>
       </div>
 
-      <div class="task-card">
-        <h3>TITULO TAREA</h3>
-        <span class="task-time">TIEMPO</span>
-        <p class="task-summary">RESUMEN</p>
-        <button class="btn-done">Terminada</button>
+      <div class="task-card" *ngFor="let tarea of tareas; let i = index">
+        <h3>{{ tarea.titulo }}</h3>
+        <span class="task-time">{{ tarea.tiempo }}</span>
+        <p class="task-summary">{{ tarea.resumen }}</p>
+        <button class="btn-done" (click)="terminarTarea(i)">Terminada</button>
       </div>
     </div>
   `,
@@ -108,6 +108,8 @@ import { USUARIOS, Usuario } from '../datos';
 })
 export class UsuarioDetalle implements OnInit {
   usuario?: Usuario;
+  // Lista local para manejar las tareas en la vista
+  tareas: any[] = [];
 
   constructor(private route: ActivatedRoute) {}
 
@@ -115,6 +117,28 @@ export class UsuarioDetalle implements OnInit {
     this.route.paramMap.subscribe(params => {
       const id = Number(params.get('id'));
       this.usuario = USUARIOS.find(u => u.id === id);
+
+      if (this.usuario) {
+        // Cargamos las tareas del usuario o ponemos unas de ejemplo si no tiene
+        this.tareas = (this.usuario as any).tareas || [
+          { titulo: 'Revisar Pendientes', tiempo: '15 min', resumen: 'Verificar correos y mensajes.' },
+          { titulo: 'Actualizar Estado', tiempo: '30 min', resumen: 'Sincronizar con el equipo.' }
+        ];
+      }
     });
+  }
+
+  agregarTarea(): void {
+    // Lógica para agregar una tarea nueva (simulada)
+    this.tareas.push({
+      titulo: `Dominar angular ${this.tareas.length + 1}`,
+      tiempo: '2026/03/2026',
+      resumen: 'Descripción pendiente de editar...'
+    });
+  }
+
+  terminarTarea(index: number): void {
+    // Lógica para eliminar la tarea de la lista
+    this.tareas.splice(index, 1);
   }
 }
