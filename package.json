@@ -9,7 +9,7 @@
     "test": "ng test",
     "serve:ssr:nuevo": "node dist/nuevo/server/server.mjs",
     "predeploy": "ng build --configuration production --base-href /nuevo-trabajo-/",
-    "deploy": "npx angular-cli-ghpages --dir=dist/nuevo/browser --404page=dist/nuevo/browser/index.html"
+    "deploy": "npx angular-cli-ghpages --dir=dist/nuevo/browser"
   },
   "private": true,
   "packageManager": "npm@11.6.2",

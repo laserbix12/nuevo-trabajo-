@@ -1,0 +1,38 @@
+<div class="app-container">
+  <header class="main-header">
+    <div class="logo-circle">
+      <img src="https://cdn-icons-png.flaticon.com/512/906/906334.png" alt="logo">
+    </div>
+    <h1>TAREA FACIL</h1>
+    <p>Administrador de Tareas ADSO</p>
+  </header>
+
+  <div class="content-wrapper">
+    <aside class="sidebar">
+      <div *ngFor="let u of usuarios"
+           (click)="seleccionar(u)"
+           class="user-item"
+           [class.active]="usuarioSeleccionado.id === u.id">
+        <img [src]="u.foto" class="avatar">
+        <span>{{ u.nombre }}</span>
+      </div>
+    </aside>
+
+    <main class="task-section">
+      <div class="task-header">
+        <h2>Tareas de {{ usuarioSeleccionado.nombre }}</h2>
+        <button class="btn-add">Agregar Tarea Nueva</button>
+      </div>
+
+      <div class="task-card">
+        <h3>{{ usuarioSeleccionado.tarea }}</h3>
+        <p class="task-date">2026-04-14</p>
+        <p class="task-desc">{{ usuarioSeleccionado.desc }}</p>
+
+        <div class="btn-footer">
+          <button class="btn-done">Terminada</button>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
