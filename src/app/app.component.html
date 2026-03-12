@@ -21,18 +21,47 @@
     <main class="task-section">
       <div class="task-header">
         <h2>Tareas de {{ usuarioSeleccionado.nombre }}</h2>
-        <button class="btn-add">Agregar Tarea Nueva</button>
+        <button class="btn-add" (click)="abrirModal()">Agregar Tarea Nueva</button>
       </div>
 
-      <div class="task-card">
-        <h3>{{ usuarioSeleccionado.tarea }}</h3>
-        <p class="task-date">2026-04-14</p>
-        <p class="task-desc">{{ usuarioSeleccionado.desc }}</p>
+      <div *ngIf="usuarioSeleccionado.tareas.length === 0" class="no-tasks">
+        <p>No hay tareas para este usuario.</p>
+      </div>
+
+      <div *ngFor="let tarea of usuarioSeleccionado.tareas" class="task-card">
+        <h3>{{ tarea.titulo }}</h3>
+        <p class="task-date">{{ tarea.fecha }}</p>
+        <p class="task-desc">{{ tarea.desc }}</p>
 
         <div class="btn-footer">
-          <button class="btn-done">Terminada</button>
+          <button class="btn-done" (click)="terminarTarea(tarea.id)">Terminada</button>
         </div>
       </div>
     </main>
+  </div>
+</div>
+
+<!-- Modal para agregar tarea -->
+<div class="modal-overlay" *ngIf="mostrarModal" (click)="cerrarModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h2>Agregar Nueva Tarea</h2>
+    <form (ngSubmit)="agregarTarea()">
+      <div class="form-group">
+        <label for="titulo">Título</label>
+        <input type="text" id="titulo" name="titulo" [(ngModel)]="nuevaTarea.titulo" required>
+      </div>
+      <div class="form-group">
+        <label for="desc">Resumen</label>
+        <textarea id="desc" name="desc" rows="3" [(ngModel)]="nuevaTarea.desc" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="fecha">Fecha</label>
+        <input type="date" id="fecha" name="fecha" [(ngModel)]="nuevaTarea.fecha" required>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" (click)="cerrarModal()">Cancelar</button>
+        <button type="submit" class="btn-create">Crear</button>
+      </div>
+    </form>
   </div>
 </div>
