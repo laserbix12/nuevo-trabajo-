@@ -19,7 +19,7 @@ import { Usuario, UsuarioService } from '../usuario.service';
         @for (tarea of usuario.tareas; track $index) {
           <div class="card">
             <h3>{{ tarea.titulo }}</h3>
-            <div class="date">{{ tarea.fecha }}</div>
+            <div class="date">{{ tarea.fecha | date:"EEEE, d 'de' MMMM 'de' y, h:mm a" | lowercase }}</div>
             <p>{{ tarea.desc }}</p>
             <div class="footer">
               <button [class]="tarea.hecha ? 'btn-done' : 'btn-pending'" (click)="toggle($index)">

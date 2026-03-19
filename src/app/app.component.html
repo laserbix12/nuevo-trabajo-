@@ -30,7 +30,7 @@
 
       <div *ngFor="let tarea of usuarioSeleccionado.tareas" class="task-card">
         <h3>{{ tarea.titulo }}</h3>
-        <p class="task-date">{{ tarea.fecha }}</p>
+        <p class="task-date">{{ tarea.fecha | date:"EEEE, d 'de' MMMM 'de' y, h:mm a" | lowercase }}</p>
         <p class="task-desc">{{ tarea.desc }}</p>
 
         <div class="btn-footer">
